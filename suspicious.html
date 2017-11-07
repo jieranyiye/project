@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>用户详情</title>
+    <link rel="stylesheet" type="text/css" href="static/templates/css/Interface.css">
+    <link rel="stylesheet" type="text/css" href="static/templates/css/index.css">
+    <link rel="stylesheet" type="text/css" href="static/templates/css/suspicious.css">   
+</head>
+<body>
+<div class="interface">
+    <div class="i_top">
+        <span id="ly_logo"></span>
+        <h1>无名之辈系统管理平台</h1>
+        <div class="personal">
+            <a href="" id="personal">
+                <span id="user_logo"></span></a>
+            <ul id="us">
+                <li id="personal_one">你好,</li>
+                <li id="personal_two">{{username}}</li>
+                <li id="personal_three" class="hiddenTags">
+                    <a href="/admin?page=1">管理</a>
+                </li>
+                <li>
+                    <a href="/">退出</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="i_left">
+        <h2>
+            <a href="/index?page=1">总览</a></h2>
+        <h2>
+            <a href="javascript:;" id="black">黑名单</a>
+    </div>
+    <div class="s_box">
+        <input type="button" name="join" id="join" value="加入黑名单">
+    </div>
+    <div class="record">
+        <table class="tb" id="tablelist">
+            <thead>
+            <tr>
+                <th class="list_one">序号</th>
+                <th class="list_two">steam ID</th>
+                <th class="list_three">Device Unique Identifier</th>
+                <th class="list_four">Graphics Device ID</th>
+                <th class="list_five">Graphics Device Vendor ID</th>
+                <th class="list_six">时间</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    <div id="dis" class="hiddenTags">
+        <p>暂无数据</p>
+    </div>
+    </div>
+        <div class="reason" id="reason">
+    <form name="input8" action="/addBlackList" method="post">
+        <p>请填写把该用户加入黑名单的理由</p>
+        <textarea name="reason" id="reasontext"></textarea>
+        <input type="text" name="page" value="1" class="hiddenTags">
+        <input type="text" name="steamID" value="" class="hiddenTags" id="stID">
+        <input type="button" name="cancel" class="cancel" value="取消" id="cancelJoin">
+        <input type="button" name="confirm" class="confirm" value="确认" id="determine">
+    </form>
+    </div>
+</div>
+<script type="text/javascript" src="static/templates/script/jquery.min.js"></script>
+<script type="text/javascript">
+    var authority = '{{authority}}';
+    var strs = new Array();
+    strs = authority.split(",");
+    var thisname = '{{username}}';
+    var listInfo = {% raw logInfo %};
+    var list = listInfo.logInfo;
+    var pageSize = listInfo.pageSize;
+    var page = 1;
+    $(document).ready(function(){
+        if (strs[7] == '1') {
+            $("#personal_three").show();
+        }
+    });
+    $('#join').click(function(){
+        if (strs[2] == '0') {
+            alert("你没有此权限！")
+        } else if (strs[2] == '1') {
+            $("#reason").show();
+        }
+    }) 
+    $('#black').click(function(){
+        if (strs[4] == '0') {
+            alert("你没有此权限！")
+        } else if (strs[4] == '1') {
+            window.location.href="/blackList?page=1";
+        }
+    })
+    $('#cancelJoin').click(function(){
+        $("#reason").hide();
+    })
+    $('#determine').click(function(event){
+        event.preventDefault();
+        if($("#reasontext").val().length <= 0){
+            alert("理由不能为空");
+        }else{
+            $("#reason form").submit();
+        }
+    })
+    $('#stID').val() == list[0].steamID;
+    var appendTable = function (list, page) {
+        $("#tablelist>tbody").html("");
+        $(list).each(function (i, item) {
+            $("#tablelist>tbody").append(
+                "<tr>" +
+                "<td>" + ((page - 1) * 10 + i + 1) + "</td>" +
+                "<td>" + item.steamID + "</td>" +
+                "<td>" + item.deviceUniqueIdentifier + "</td>" +
+                "<td>" + item.graphicsDeviceID + "</td>" +
+                "<td>" + item.graphicsDeviceVendorID + "</td>" +
+                "<td>" + item.loginTime + "</td>" +
+                "</tr>"
+            )
+        });
+    }
+    appendTable(list, page);
+</script>
+</body>
+</html>

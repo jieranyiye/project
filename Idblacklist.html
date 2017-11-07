@@ -1,0 +1,159 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>黑名单</title>
+    <link rel="stylesheet" type="text/css" href="static/templates/css/Interface.css">
+    <link rel="stylesheet" type="text/css" href="static/templates/css/index.css">
+    <link rel="stylesheet" type="text/css" href="static/templates/css/blacklist.css">
+</head>
+<body>
+<div class="interface">
+    <div class="i_top">
+        <span id="ly_logo"></span>
+        <h1>无名之辈系统管理平台</h1>
+        <div class="personal">
+            <a href="" id="personal">
+                <span id="user_logo"></span></a>
+            <ul id="us">
+                <li id="personal_one">你好,</li>
+                <li id="personal_two">{{username}}</li>
+                <li id="personal_three" class="hiddenTags">
+                    <a href="/admin?page=1">管理</a>
+                </li>
+                <li>
+                    <a href="/">退出</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="i_left">
+        <h2>
+            <a href="/index?page=1">总览</a></h2>
+        <h2>
+            <a href="javascript:;" id="black">黑名单</a></h2>
+    </div>
+    <p id="prompt"></p>
+    <div class="s_box">
+        <form name="input2" action="/blackListQuery" method="post" id="blackIdQuery">
+            <input type="text" name="steamId" placeholder="请输入steamID" id="lookup">
+            <input type="text" name="page" value="1" id="page3" class="hiddenTags">
+            <input type="button" name="steamID" id="start" value="">
+        </form>
+    </div>
+    <div class="record" id="record">
+        <table class="tb" id="tablelist">
+            <thead>
+            <tr>
+                <th class="list_one">序号</th>
+                <th class="list_two">steam ID</th>
+                <th class="list_six">时间</th>
+                <th class="list_seven">操作用户</th>
+                <th class="list_five">理由</th>
+                <th class="list_eight">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    <div id="dis" class="hiddenTags">
+    <p>暂无数据</p>
+    </div>
+        <div class="tcdPageCode" id="tcd"></div>
+        <div class="reason1" id="reason1">
+        <form name="input7" action="/deleteBlackList" method="post">
+        <p>是否确认解禁此用户</p>
+        <input type="text" name="page" value="1" class="hiddenTags">
+        <input type="text" name="steamID" value="" class="hiddenTags" id="stID1">
+        <input type="button" name="cancel1" class="cancel1" value="取消" id="cancelDisable">
+        <input type="submit" name="confirm1" class="confirm1" value="确认">
+    </form>
+    </div>
+    </div>
+    <div id="totalnumber">
+        <p id="number"></p>
+    </div>
+</div>
+<script type="text/javascript" src="static/templates/script/jquery.min.js"></script>
+<script type="text/javascript" src="static/templates/script/jquery.page.js"></script>
+<script type="text/javascript">
+    var authority = '{{authority}}';
+    var strs = new Array();
+    strs = authority.split(",");
+    var listInfo = {% raw logInfo %};
+    var list = listInfo.logInfo;
+    var pageSize = listInfo.pageSize;
+    var page = {{page}};
+    var total = listInfo.total;
+    $(document).ready(function(){
+        if (strs[7] == '1') {
+            $("#personal_three").show();
+        }
+    });
+    $('#black').click(function(){
+        if (strs[4] == '0') {
+            alert("你没有此权限！")
+        } else if (strs[4] == '1') {
+            window.location.href="/blackList?page=1";
+        }
+    })
+    $('#start').click(function(event){
+        event.preventDefault();
+        if (strs[1] == '0') {
+            alert("你没有此权限！")
+        } else if (strs[1] == '1') {
+            $("#blackIdQuery").submit();
+        }
+    })
+    $('#cancelDisable').click(function(){
+        $("#reason1").hide();
+    })
+    var appendTable = function (list, page) {
+        $("#tablelist>tbody").html("");
+        $(list).each(function (i, item) {
+            $("#tablelist>tbody").append(
+                "<tr>" +
+                "<td>" + ((page - 1) * 10 + i + 1) + "</td>" +
+                "<td>" + item.steamID + "</td>" +
+                "<td>" + item.time + "</td>" +
+                "<td>" + item.adminID + "</td>" +
+                "<td>" + item.reason + "</td>" +
+                "<td>"+
+                "<input type='button' name='details' value='解禁' class='details' data-id="+item.steamID+">"+"</td>" +
+                "</tr>"
+            )
+        });
+    }
+        $(function () {
+        appendTable(list, page);
+        $(".tcdPageCode").createPage({
+            pageCount: pageSize,
+            current: page,
+            backFn: function (p) {
+                window.location.href = "/blackListQuery?" 
+            }
+        });
+    })
+    $(document).on('click','.details',function(){
+        var sid1=$(this).attr('data-id');
+        if (strs[5] == '0') {
+            alert("你没有此权限！");
+        } else if (strs[5] == '1') {
+            $("#reason1").show();
+            $("#stID1").val(sid);
+        }
+    })
+    $(document).ready(function(){
+        $('#number').text("共 "+total+" 条记录");
+        $('#prompt').text("累积黑名单用户为："+ total + " 个");
+        if (total=='0'){
+            $('#number').hide();
+            $('#dis').show();
+            $('#tcd').hide();
+        } else {
+            $('#dis').hide();
+        }
+    }); 
+</script>
+</body>
+</html>

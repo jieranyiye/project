@@ -1,0 +1,249 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>权限设置</title>
+        <link type="text/css" href="static/templates/css/Interface.css" rel="Stylesheet" />
+        <link type="text/css" href="static/templates/css/Jurisdiction.css" rel="Stylesheet" />
+    </head>   
+    <body>
+        <div class="interface">
+            <div class="i_top">
+                <span id="ly_logo"></span>
+                <h1>无名之辈系统管理平台</h1>
+                <div class="personal">
+                    <a href="" id="personal">
+                        <span id="user_logo"></span></a>
+                    <ul id="us">
+                        <li id="personal_one">你好,</li>
+                        <li id="personal_two">{{username}}</li>
+                        <li id="personal_three" class="hiddenTags">
+                            <a href="/admin?page=1">管理</a></li>
+                        <li>
+                            <a href="/">退出</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="i_left">
+                <h2>
+                    <a href="/index?page=1">总览</a></h2>
+                <h2>
+                    <a href="javascript:;" id="black">黑名单</a></h2>
+            </div>
+        <div id="permission">
+        <p>权限设置：</p>
+        <form action="/authority" method="POST" name="jurisdiction">
+        <div class="category">
+        总览</br>
+            <label><input name="setup" type="checkbox" value="" checked="checked" disabled="disabled"/>总览</label>
+            <label><input name="setup" type="checkbox" value="" id="ipOne" checked="" />查询</label>
+            <label><input name="setup" type="checkbox" value="" id="ipTwo" checked="checked" />搜索</label>
+            <label><input name="setup" type="checkbox" value="" id="ipThree" />加入黑名单</label>
+            <label><input name="setup" type="checkbox" value="" id="ipFour" checked="checked" />查看可疑/破解用户</label>
+        </div>
+        <div class="category">黑名单<br/>
+            <label><input name="setup" type="checkbox" value="" id="ipFive" checked="checked" />查看黑名单</label>
+            <label><input name="setup" type="checkbox" value="" id="ipSix" />解禁</label>
+            <label><input name="setup" type="checkbox" value="" id="ipSeven" checked="checked" />搜索</label>
+        </div>
+        <div class="category">用户管理<br/>
+            <label><input name="setup" type="checkbox" id="ipEight" value=""/>查看用户列表</label>
+            <label><input name="setup" type="checkbox" id="ipNine" value="" />新增用户</label>
+            <label><input name="setup" type="checkbox" id="ipTen" value="" />权限管理</label>
+            <label><input name="setup" type="checkbox" id="ipEleven" value="" />启用/禁用</label>
+            <label><input name="setup" type="checkbox" id="ipTwelve" value="" />删除</label>
+        </div>
+            <input class="hiddenTags" name="adminName"  type="text" value="{{adminName}}"/>
+            <input class="hiddenTags" name="newAuthority"  type="text" id="newAuthority" value=""/>
+            <input type="submit" name="confirm" id="confirm" value="确认">
+            <input type="button" name="cance" id="cance" value="取消">
+        </form>
+        </div>
+        </div>
+    <script type="text/javascript" src="static/templates/script/jquery.min.js"></script>
+    <script type="text/javascript">
+    var authority = '{{authority}}';
+    var strs = new Array();
+    strs = authority.split(",");
+    var getAuthority = '{{getAuthority}}';
+    var permissionArray = getAuthority.split(",");
+    $(document).ready(function(){
+        if (strs[7] == '1') {
+            $("#personal_three").show();
+        }
+    })
+    $('#black').click(function(){
+        if (strs[4] == '0') {
+            alert("你没有此权限！")
+        } else if (strs[4] == '1') {
+            window.location.href="/blackList?page=1";
+        }
+    })
+    $('#cance').click(function(){
+        window.location.href="/admin?page=1";
+    })
+    $(document).ready(function(){
+        if (permissionArray[0] == '0') {
+            $('#ipOne').attr('checked',false);
+        }else{
+            $('#ipOne').attr('checked',true);
+        }
+        if (permissionArray[1] == '0') {
+           $('#ipTwo').attr('checked',false);
+        }else{
+            $('#ipTwo').attr('checked',true);
+        }
+        if (permissionArray[2] == '0') {
+            $('#ipThree').attr('checked',false);
+        }else{
+            $('#ipThree').attr('checked',true);
+        }
+        if (permissionArray[3] == '0') {
+            $('#ipFour').attr('checked',false);
+        }else{
+            $('#ipFour').attr('checked',true);
+        }
+        if (permissionArray[4] == '0') {
+            $('#ipFive').attr('checked',false);
+            $('#ipSix').attr('disabled',true);
+            $('#ipSeven').attr('disabled',true);
+        }else{
+            $('#ipFive').attr('checked',true);
+        }
+        if (permissionArray[5] == '0') {
+            $('#ipSix').attr('checked',false);
+        }else{
+            $('#ipSix').attr('checked',true);
+        }
+        if (permissionArray[6] == '0') {
+            $('#ipSeven').attr('checked',false);
+        }else{
+            $('#ipSeven').attr('checked',true);
+        }
+        if (permissionArray[7] == '0') {
+            $('#ipEight').attr('checked',false);
+            $('#ipNine').attr('disabled',true);
+            $('#ipTen').attr('disabled',true);
+            $('#ipEleven').attr('disabled',true);
+            $('#ipTwelve').attr('disabled',true);
+        }else{
+            $('#ipEight').attr('checked',true);
+        }
+        if (permissionArray[8] == '0') {
+            $('#ipNine').attr('checked',false);
+        }else{
+            $('#ipNine').attr('checked',true);
+        }
+        if (permissionArray[9] == '0') {
+            $('#ipTen').attr('checked',false);
+        }else{
+            $('#ipTen').attr('checked',true);
+        }
+        if (permissionArray[10] == '0') {
+            $('#ipEleven').attr('checked',false);
+        }else{
+            $('#ipEleven').attr('checked',true);
+        }
+        if (permissionArray[11] == '0') {
+            $('#ipTwelve').attr('checked',false);
+        }else{
+            $('#ipTwelve').attr('checked',true);
+        }
+    })
+    $('#confirm').click(function(){
+        var param="";
+        if($('#ipOne').is(':checked')){
+            param+= 1+",";
+        }else{
+            param+= 0+",";
+        }
+        if($('#ipTwo').is(':checked')){
+            param+= 1+",";
+        }else{
+            param+= 0+",";
+        }
+        if($('#ipThree').is(':checked')){
+            param+= 1+",";
+        }else{
+            param+= 0+",";
+        }
+        if($('#ipFour').is(':checked')){
+            param+= 1+",";
+        }else{
+            param+= 0+",";
+        }
+        if($('#ipFive').is(':checked')){
+            param+= 1+",";
+        }else{
+            param+= 0+",";
+        }
+        if($('#ipSix').is(':checked')){
+            param+= 1+",";
+        }else{
+            param+= 0+",";
+        }
+        if($('#ipSeven').is(':checked')){
+            param+= 1+",";
+        }else{
+            param+= 0+",";
+        }
+        if($('#ipEight').is(':checked')){
+            param+= 1+",";
+        }else{
+            param+= 0+",";
+        }
+        if($('#ipNine').is(':checked')){
+            param+= 1+",";
+        }else{
+            param+= 0+",";
+        }
+        if($('#ipTen').is(':checked')){
+            param+= 1+",";
+        }else{
+            param+= 0+",";
+        }
+        if($('#ipEleven').is(':checked')){
+            param+= 1+",";
+        }else{
+            param+= 0+",";
+        }
+        if($('#ipTwelve').is(':checked')){
+            param+= 1;
+        }else{
+            param+= 0;
+        }
+        $("#newAuthority").val(param);
+    })
+    $('#ipEight').click(function(){
+        if($('#ipEight').is(':checked')) {
+            $('#ipNine').attr('disabled',false);
+            $('#ipTen').attr('disabled',false);
+            $('#ipEleven').attr('disabled',false);
+            $('#ipTwelve').attr('disabled',false);
+        } else {
+            $('#ipNine').attr('disabled',true);
+            $('#ipTen').attr('disabled',true);
+            $('#ipEleven').attr('disabled',true);
+            $('#ipTwelve').attr('disabled',true);
+            $('#ipNine').attr('checked',false);
+            $('#ipTen').attr('checked',false);
+            $('#ipEleven').attr('checked',false);
+            $('#ipTwelve').attr('checked',false);
+        }
+    })    
+    $('#ipFive').click(function(){
+        if ($('#ipFive').is(':checked')) {
+            $('#ipSix').attr('disabled',false);
+            $('#ipSeven').attr('disabled',false);
+        } else {
+            $('#ipSix').attr('disabled',true);
+            $('#ipSeven').attr('disabled',true);
+            $('#ipSix').attr('checked',false);
+            $('#ipSeven').attr('checked',false);
+        }
+    })
+    </script>
+    </body>
+
+</html>

@@ -1,0 +1,239 @@
+@charset "utf-8";
+	/* CSS Document */
+a {
+	text-decoration:none;
+}
+a:hover {
+	text-decoration:none;
+}
+button{
+	text-align: center;
+}
+.tcdPageCode {
+	padding:15px 20px;
+	text-align:left;
+	color:#ccc;
+	text-align:center;
+}
+.tcdPageCode a {
+	display:inline-block;
+	color:#428bca;
+	display:inline-block;
+	height:25px;
+	line-height:25px;
+	padding:0 10px;
+	border:1px solid #ddd;
+	margin:0 2px;
+	border-radius:4px;
+	vertical-align:middle;
+}
+.tcdPageCode a:hover {
+	text-decoration:none;
+	border:1px solid #428bca;
+}
+.tcdPageCode span.current {
+	display:inline-block;
+	height:25px;
+	line-height:25px;
+	padding:0 10px;
+	margin:0 2px;
+	color:#fff;
+	background-color:#428bca;
+	border:1px solid #428bca;
+	border-radius:4px;
+	vertical-align:middle;
+}
+.tcdPageCode span.disabled {
+	display:inline-block;
+	height:25px;
+	line-height:25px;
+	padding:0 10px;
+	margin:0 2px;
+	color:#bfbfbf;
+	background:#f2f2f2;
+	border:1px solid #bfbfbf;
+	border-radius:4px;
+	vertical-align:middle;
+}
+.data {
+	position:absolute;
+	float:left;
+	width:1200px;
+	height:125px;
+	margin:120px 0 0 130px;
+	text-align:center;
+}
+.data div {
+	float:left;
+	width:180px;
+	height:100px;
+	border:1px solid #000;
+	margin-left:30px;
+}
+.data span {
+	float: right;
+	width: 32px;
+	height: 32px;
+	background: url(../img/rise.png) no-repeat center;
+}
+.number_two {
+	float:left;
+	margin:0px 0 0 16px;
+	width:130px;
+	font-size:25px;
+	font-weight:border;
+}
+.number_one {
+	float:left;
+	width:178px;
+	margin:0 0 10px 0;
+	font-size:25px;
+	font-weight:border;
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+}
+#calendar {
+	position:absolute;
+	margin:250px 0 0 160px;
+	width: 1000px;
+}
+#calendar p {
+	float:left;
+	margin:0;
+	font-size:18px;
+}
+#dateQuery{
+	float: left;
+}
+#c10,#c11 {
+	width:115px;
+	height:22px;
+	border:1px solid #1E90FF;
+	color:#1E90FF;
+	border-radius:4px;
+}
+#c10 {
+	margin-left:20px;
+}
+#c11 {
+	margin-left:70px;
+}
+#query {
+	width:100px;
+	margin-left:70px;
+}
+#see {
+	float: left;
+	width:135px;
+	margin:0 75px;
+}
+.record {
+	margin:40px 0 0 160px;
+}
+.tb {
+	text-align:center;
+	border-collapse:collapse;
+	width:1303px;
+	margin-bottom:20px;
+}
+th {
+	border:1px solid #000;
+}
+td {
+	border:1px solid #000;
+	border-collapse:collapse;
+	height:60px;
+	word-break: break-all;
+}
+.list_one {
+	width:70px;
+	height:30px;
+}
+.list_two {
+	width:160px;
+}
+.list_three {
+	width:228px;
+}
+.list_four {
+	width:229px;
+}
+.list_five {
+	width:230px;
+}
+.list_six {
+	width:173px;
+}
+.list_seven {
+	width:190px;
+}
+.record input {
+	width:76px;
+	height:26px;
+}
+.details {
+	margin-left:10px;
+}
+#prompt{
+	font-size: 13px;
+	position: absolute;
+	width: 670px;
+	height:30px;
+	padding-top: 10px;
+	margin: 320px 0 0 160px; 
+}
+.s_box{
+	margin: 331px 0 0 1050px;
+}
+#lookup{
+	width: 338px;
+	height: 24px;
+	outline:none;
+	border:1px solid #009dda;
+	border-right: none;
+	border-top-left-radius: 7px;
+	border-bottom-left-radius: 7px;
+}
+#start{
+	position: absolute;
+	height: 28px;
+	width: 28px;
+	background:url(../img/ss.png) no-repeat;
+	background-size: 100% 100%;
+	outline:none;
+	margin-left: -5px;
+	border: 1px solid #009dda;
+	border-left: none;
+	border-top-right-radius: 7px;
+	border-bottom-right-radius: 7px;
+}
+#paging{
+	float: left;
+	margin-left: 880px;
+}
+#paging div{
+	text-align: center;
+}
+#totalnumber{
+	float: left;
+	margin-left: 50px;
+	font-size: 14px;
+	width: 200px;
+}
+#name{
+	display: none;
+}
+#ck{
+	float: left;
+	margin: -26px 0 0 550px;
+}
+#adm{
+	font-size: 17px;
+	outline: none;
+	border: none;
+	background-color: #FFF;
+}
+.hiddenTags{
+	display: none;
+}

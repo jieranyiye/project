@@ -1,0 +1,29 @@
+.reason{
+    width:390px;
+    height:220px;
+    margin: -120px 0 0 -185px;
+    text-align: center;
+    font-size: 22px;
+    border:1px solid #000;
+    display:none;
+    left:50%;
+    top:50%;
+    background-color:#FFF;
+    position:fixed;
+}
+.cancel,.confirm{
+    width: 100px;
+    height: 25px; 
+    margin-top: 20px;    
+}
+.confirm{
+    margin-left: 72px;
+}
+textarea{
+    width:320px;
+    height:70px;
+}
+.tcdPageCode{
+    position: absolute;
+    right: 25%;
+}

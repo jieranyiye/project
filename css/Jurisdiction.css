@@ -1,0 +1,27 @@
+#permission{
+    font-size: 14px;
+    width: 1000px;
+    height: 460px;
+    margin: 150px 0 0 200px;
+}
+#permission form,.category{
+    width: 950px;
+    height: 60px;
+    margin-top: 40px;
+}
+#permission form label{
+    float: left;
+    width: 140px;
+    margin:20px 5px 0 0;
+} 
+#permission p{
+    font-size: 20px;
+}
+#confirm,#cance{
+    width: 120px;
+    height: 26px;
+    margin:80px; 
+}
+.hiddenTags{
+    display: none;
+}

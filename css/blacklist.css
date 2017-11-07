@@ -1,0 +1,41 @@
+.list_eight {
+    width:100px;
+}
+#prompt {
+    margin:150px 0 0 150px;
+}
+.s_box {
+    margin:170px 0 0 1050px;
+}
+.details {
+    width:70px;
+}
+.record {
+    width:940px;
+}
+.reason1 {
+    width:340px;
+    height:130px;
+    text-align: center;
+    font-size: 22px;
+    border:1px solid #000;
+    display:none;
+    left:50%;
+    top:50%;
+    position:fixed;
+    margin-left:-170px;
+    margin-top:-65px;
+    background-color:#FFF;
+}
+.cancel1,.confirm1 {
+    width:100px;
+    height:25px;
+    margin-top:20px;
+}
+.confirm1 {
+    margin-left:72px;
+}
+.tcdPageCode{
+    position: absolute;
+    right: 25%;
+}

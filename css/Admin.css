@@ -1,0 +1,49 @@
+.list_five {
+  width:160px;
+}
+.list_seven {
+  width:90px;
+}
+#newjoin {
+  width:100px;
+  height:25px;
+}
+#yhtext {
+  font-size:14px;
+  color:#333;
+}
+.s_box {
+  margin:130px 0 0 160px;
+}
+.reason1 {
+  width:340px;
+  height:130px;
+  margin-left:-170px;
+  margin-top:-65px;
+  text-align: center;
+  font-size: 22px;
+  border:1px solid #000;
+  display:none;
+  left:50%;
+  top:50%;
+  background-color:#FFF;
+  position:fixed;
+
+}
+.cancel1,.confirm1 {
+  width:100px;
+  height:25px;
+  margin-top:20px;
+}
+.confirm1 {
+  margin-left:72px;
+}
+.jurisdiction{
+  border: none;
+  background-color: #FFF;
+  font-size: 15px;
+}
+.tcdPageCode{
+  position: absolute;
+  right: 25%;
+}

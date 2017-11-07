@@ -1,0 +1,111 @@
+@charset "utf-8";
+/* CSS Document */
+body {
+	margin: 0px;
+	font-family: "Microsoft YaHei" ! important;
+}
+.interface {
+	float: left;
+	width: 98%;
+	min-width: 1554px;
+	margin: 10px 0 0 10px;
+	border: 1px solid #000;
+}
+.i_top {
+	position: relative;
+	float: left;
+	width: 100%;
+	height: 90px;
+	border-bottom: 1px solid #000;
+}
+#ly_logo {
+	background: url(../img/ly_logo.png) no-repeat center;
+	background-size: 100% 100%;
+	float: left;
+	width: 64px;
+	height: 64px;
+	margin: 13px 0 0 30px;
+}
+h1 {
+	float: left;
+	margin: 33px 0 0 20px;
+	width: 350px;
+}
+#user_logo {
+	background: url(../img/user_logo.png) no-repeat center;
+	background-size: 100% 100%;
+	float: left;
+	width: 52px;
+	height: 52px;
+	margin: 19px 0 0 75px;
+}
+.i_left {
+	float: left;
+	width: 120px;
+	border-right: 1px solid #000;
+	height: 1070px;
+	padding-top: 40px;
+}
+.i_left h2 {
+	float: left;
+	width: 114px;
+	margin: 0 0 25px 18px;
+}
+.i_left a {
+	text-decoration: none;
+	color: #000;
+}
+.personal {
+	text-align: center;
+	float: right;
+	width: 170px;
+	height: 170px;
+	margin-right: 20px;
+}
+.personal ul {
+	display: none;
+	list-style: none;
+}
+.personal li {
+	padding-top: 5px;
+	background-color: #FFF;
+	float: left;
+	width: 114px;
+	height: 25px;
+	border: 1px solid #000;
+	border-top: none;
+}
+.personal li a {
+	text-decoration: none;
+	color: #000;
+}
+#personal_one {
+	border-top: 1px solid #000;
+	width: 50px;
+	border-right: none;
+	text-align: right;
+}
+#personal_two {
+	border-top: 1px solid #000;
+	width: 64px;
+	border-left: none;
+	text-align: left;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.personal:hover > #us {
+	display: block;
+}
+#dis{
+	text-align: center;
+	border: 1px solid #000;
+	width: 1301px;
+	height: 35px;
+	padding-top: 10px;
+	margin: -20px 0 0 0px;
+	font-size: 20px;
+}
+#dis p{
+	margin-top: -1px;
+}

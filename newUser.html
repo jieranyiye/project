@@ -1,0 +1,84 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>新增用户</title>
+        <link type="text/css" href="static/templates/css/New_user.css" rel="Stylesheet" />
+        <link type="text/css" href="static/templates/css/Interface.css" rel="Stylesheet" />
+    </head>
+    
+    <body>
+        <div class="interface">
+            <div class="i_top">
+                <span id="ly_logo"></span>
+                <h1>无名之辈系统管理平台</h1>
+                <div class="personal">
+                    <a href="" id="personal">
+                        <span id="user_logo"></span></a>
+                    <ul id="us">
+                        <li id="personal_one">你好,</li>
+                        <li id="personal_two">{{username}}</li>
+                        <li id="personal_three" class="hiddenTags">
+                            <a href="/admin?page=1">管理</a></li>
+                        <li>
+                            <a href="/">退出</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="i_left">
+                <h2>
+                    <a href="/index?page=1">总览</a></h2>
+                <h2>
+                    <a href="javascript:;" id="black">黑名单</a></h2>
+            </div>
+            <div class="i_right">
+                <form id="registForm" name="input" action="/addAdmin" method="post">
+                    <p class="land">用户名：</p>
+                    <input class="Input" type="text" name="adminName" id="user_name" placeholder="请输入用户名">
+                    <p class="land">密码：</p>
+                    <input class="Input" type="password" name="password" id="password" placeholder="请输入密码">
+                    <p class="land">确认密码：</p>
+                    <input class="Input" type="password" id="next_password" placeholder="请再次输入密码">
+                    <p id="prompt"></p>
+                    <input type="button" value="确认" id="confirm_button">
+                    <input type="button" value="返回" id="return_button"></form>
+            </div>
+        </div>
+        <script type="text/javascript" src="static/templates/script/jquery.min.js"></script>
+        <script>var authority = '{{authority}}';
+            var strs = new Array();
+            strs = authority.split(",");
+            $(document).ready(function() {
+                if (strs[7] == '1') {
+                    $("#personal_three").show();
+                }
+            })
+            $('#black').click(function() {
+                if (strs[4] == '0') {
+                    alert("你没有此权限！")
+                } else if (strs[4] == '1') {
+                    window.location.href = "/blackList?page=1";
+                }
+            })
+            $('#return_button').click(function() {
+                window.location.href = "/admin?page=1";
+            })
+
+            $('#confirm_button').click(function(event) {
+                event.preventDefault();
+                if ($('#user_name').val().length <= 0) {
+                    $('#prompt').text('请输入用户名');
+                } else if ($('#password').val().length <= 0) {
+                    $('#prompt').text('请输入密码');
+                } else if ($('#next_password').val().length <= 0) {
+                    $('#prompt').text('请再次输入密码');
+                } else if ($("#password").val() != $("#next_password").val()) {
+                    $('#prompt').text('密码与确认密码不一致');
+                } else {
+                    $("#registForm").submit();
+                }
+            })</script>
+    </body>
+
+</html>

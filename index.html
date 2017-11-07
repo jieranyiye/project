@@ -1,0 +1,263 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>总览</title>
+    <link rel="stylesheet" type="text/css" href="static/templates/css/Interface.css">
+    <link rel="stylesheet" type="text/css" href="static/templates/css/index.css">
+    <link rel="stylesheet" type="text/css" href="static/templates/css/query.css"> 
+</head>
+<body>
+<div class="interface">
+    <div class="i_top">
+        <span id="ly_logo"></span>
+        <h1>无名之辈系统管理平台</h1>
+        <div class="personal">
+            <a href="" id="personal">
+                <span id="user_logo"></span></a>
+            <ul id="us">
+                <li id="personal_one">你好,</li>
+                <li id="personal_two">{{username}}</li>
+                <li id="personal_three" class="hiddenTags">
+                    <a href="/admin?page=1">管理</a>
+                </li>
+                <li>
+                    <a href="/">退出</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="i_left">
+        <h2>
+            <a href="/index?page=1">总览</a></h2>
+        <h2>
+            <a href="javascript:;" id="black">黑名单</a>
+    </div>
+    <div class="data">
+        <div>
+            <p>累积历史在线次数</p>
+            <p class="number_one"></p>{{counts['allTimes']}}</div>
+        <div>
+            <p>累积历史在线设备</p>
+            <p class="number_one"></p>{{counts['allDevices']}}</div>
+        <div>
+            <p>近30天历史在线设备</p>
+            <p class="number_two">{{counts['devices30']}}</p>
+            <span id="img_thirtyequipment"></span></div>
+        <div>
+            <p>近7天历史在线设备</p>
+            <p class="number_two">{{counts['devices7']}}</p>
+            <span id="img_sevenequipment"></span></div>
+        <div>
+            <p>昨日新增设备</p>
+            <p class="number_two">{{counts['devices1']}}</p>
+           <span id="img_newequipment"></span></div>
+    </div>
+    <div id="calendar">
+        <p>查询：</p>
+        <form name="input1" action="/dateQuery" method="post" id="dateQuery">
+            <input type="text" name="firstDate" id="c10" placeholder="点击选择开始日期" onclick="J.calendar.get({to:'c11,min'});"/>
+            <input type="text" name="lastDate" id="c11" placeholder="点击选择结束日期" onclick="J.calendar.get({to:'c10,max'});"/>
+            <input type="text" name="page" value="1" id="page1" class="hiddenTags">
+            <input type="button" name="query" value="查询" id="query">
+        </form>
+        <input type="button" name="see" value="查看异常可疑用户" id="see">
+        <input type="button" name="see" value="查看破解用户" id="crack">
+    </div>
+    <div class="s_box">
+        <form name="input2" action="/SteamIDQuery" method="post" id="SteamIDQuery">
+            <input type="text" name="steamId" placeholder="请输入steamID" id="lookup">
+            <input type="text" name="page" value="1" id="page3" class="hiddenTags">
+            <input type="button" name="steamID" id="start" value="">
+        </form>
+    </div>
+    <div class="record">
+        <table class="tb" id="tablelist">
+            <thead>
+            <tr>
+                <th class="list_one">序号</th>
+                <th class="list_two">steam ID</th>
+                <th class="list_three">Device Unique Identifier</th>
+                <th class="list_four">Graphics Device ID</th>
+                <th class="list_five">Graphics Device Vendor ID</th>
+                <th class="list_six">时间</th>
+                <th class="list_seven">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    <div id="dis" class="hiddenTags">
+        <p>暂无数据</p>
+    </div>
+    </div>
+    <div id="totalnumber">
+        <p id="number"></p>
+    </div>
+    <div id="paging">
+        <div class="tcdPageCode" id="tcd"></div>
+        <div>
+        </div>
+    </div>
+    <div class="reason" id="reason">
+    <form name="input8" action="/addBlackList" method="post">
+        <p>请填写把该用户加入黑名单的理由：</p>
+        <textarea name="reason" id="reasontext"></textarea>
+        <input type="text" name="page" value="1" class="hiddenTags">
+        <input type="text" name="steamID" value="" class="hiddenTags" id="stID">
+        <input type="button" name="cancel" class="cancel" value="取消" id="CancelJoin">
+        <input type="submit" name="confirm" class="confirm" value="确认" id="determine">
+    </form>
+    </div>
+</div>
+<script type="text/javascript" src="static/templates/script/lhgcore.js"></script>
+<script type="text/javascript" src="static/templates/script/lhgcalendar.js"></script>
+<script type="text/javascript" src="static/templates/script/jquery.min.js"></script>
+<script type="text/javascript" src="static/templates/script/jquery.page.js"></script>
+<script type="text/javascript">
+    var counts = {% raw counts %};
+    var devices30To60 = counts.devices30To60;
+    var devices7To14 = counts.devices7To14;
+    var devices1To2 = counts.devices1To2;
+    var listInfo = {% raw logInfo %};
+    var list = listInfo.logInfo;
+    var pageSize = listInfo.pageSize;
+    var page = {{page}};
+    var total = listInfo.total;
+    var authority = '{{authority}}';
+    var strs = new Array();
+    strs = authority.split(",");
+    $(document).ready(function(){
+        if (devices30To60 == 0) {
+            $('#img_thirtyequipment').css({'background-image':'url(static/templates/img/decline.png)'});
+        }else if(devices30To60 == 1){
+            $('#img_thirtyequipment').css({'background-image':'url(static/templates/img/equal.png)'});
+        }
+        if (devices7To14 == 0) {
+            $('#img_sevenequipment').css({'background-image':'url(static/templates/img/decline.png)'});
+        }else if(devices7To14 == 1){
+            $('#img_sevenequipment').css({'background-image':'url(static/templates/img/equal.png)'});
+        }
+        if (devices1To2 == 0) {
+            $('#img_newequipment').css({'background-image':'url(static/templates/img/decline.png)'});
+        }else if(devices1To2 == 1){
+            $('#img_newequipment').css({'background-image':'url(static/templates/img/equal.png)'});
+        }
+    });
+    $(document).ready(function(){
+        if (strs[7] == '1') {
+            $("#personal_three").show();
+        }
+    })
+    $('#black').click(function(){
+        if (strs[4] == '0') {
+            alert("你没有此权限！")
+        } else if (strs[4] == '1') {
+            window.location.href="/blackList?page=1";
+        }
+    })
+    $('#CancelJoin').click(function(){
+        $("#reason").hide();
+    })
+    $('#determine').click(function(event){
+        event.preventDefault();
+        if($("#reasontext").val().length <= 0){
+            alert("理由不能为空");
+        }else{
+            $("#reason form").submit();
+        }
+    })
+    var appendTable = function (list, page) {
+        $("#tablelist>tbody").html(""); 
+        $(list).each(function (i, item) { 
+            $("#tablelist>tbody").append(
+                "<tr>" +
+                "<td>" + ((page - 1) * 10 + i + 1) + "</td>" +
+                "<td>" + item.steamID + "</td>" +
+                "<td>" + item.deviceUniqueIdentifier + "</td>" +
+                "<td>" + item.graphicsDeviceID + "</td>" +
+                "<td>" + item.graphicsDeviceVendorID + "</td>" +
+                "<td>" + item.loginTime + "</td>" +
+                "<td>" +
+                "<input type='button' name='join' class='join' value='加入黑名单' data-id="+item.steamID+">" +
+                "<input type='button' name='details' value='详情' class='details' data-id="+item.steamID+"></td>" +
+                "</tr>"
+            )
+        });
+    }
+        $(function () {
+            appendTable(list, page);
+            $(".tcdPageCode").createPage({
+                pageCount: pageSize,
+                current: page,
+                backFn: function (p) {
+                    window.location.href = "/indexPage?page=" + p  
+                }
+            });
+        })
+    $(document).on('click',".details",function(){
+        var id=$(this).attr('data-id');
+        window.location.href="/suspicious?steamID="+id;
+    })
+    $(document).on('click',".join",function(){
+        var sid=$(this).attr('data-id');
+        if (strs[2] == '0') {
+            alert("你没有此权限！");
+        } else if (strs[2] == '1') {
+            $("#reason").show();
+            $("#stID").val(sid);
+        }
+    })
+    
+    $(document).ready(function(){
+        $('#number').text("共 "+total+" 条记录");
+        if (total=='0'){
+            $('#number').hide();
+            $('#dis').show();
+            $('#tcd').hide();
+        } else {
+            $('#dis').hide();
+        }
+    })  
+
+    $('#query').click(function(event){
+        event.preventDefault();
+        if (strs[0] == '0') {
+            alert("你没有此权限！")
+        } else if ( $('#c10').val().length <= 0){
+            alert("请选择开始日期");
+        } else if ($('#c11').val().length <= 0) {
+            alert("请选择结束日期");
+        } else {
+            $("#dateQuery").submit();
+        }
+    })
+
+    $('#start').click(function(event){
+        event.preventDefault();
+        if (strs[1] == '0') {
+            alert("你没有此权限！")
+        } else if (strs[1] == '1') {
+            $("#SteamIDQuery").submit();
+        }
+    })
+
+    $('#see').click(function(event){
+        event.preventDefault();
+        if (strs[3] == '0') {
+            alert("你没有此权限！")
+        } else if (strs[3] == '1') {
+            $("#suspiciousQuery").submit();
+            window.location.href="/suspiciousPage?page=1";
+        }
+    })
+    $('#crack').click(function(event){
+        if (strs[3] == '0') {
+            alert("你没有此权限！")
+        } else if (strs[3] == '1') {
+            window.location.href="/crackUser?page=1";
+        }
+    })
+</script>
+</body>
+</html>

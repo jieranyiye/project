@@ -1,0 +1,190 @@
+html,body{
+    margin:0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+body {
+    min-width: 1000px;
+    min-height: 600px;
+	font-family:"Microsoft YaHei",微软雅黑,"Microsoft JhengHei",华文细黑,STHeiti,MingLiu;
+    color: #fff;
+}
+.main{
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: url(../img/bg-logo.jpg) no-repeat center/cover;
+}
+#Interface{
+    position: absolute;
+    margin: 0 auto;
+    width: 440px;
+    height: 480px;
+    left: 0;
+    right: 0;
+    top: 50%;
+    margin-top: -200px;
+}
+ul{
+    list-style: none;
+}
+li{
+    height: 65px;
+    width: 500px;
+}
+#Interface ul li:nth-child(1){
+    text-align: center;
+    width: 400px;
+}
+#Interface ul li:nth-child(2),#Interface ul li:nth-child(3),#Interface ul li:nth-child(4){
+    float: left;
+    margin: 0 0 20px 0;
+}
+#Interface ul li:nth-child(2) p,#Interface ul li:nth-child(3) p,#Interface ul li:nth-child(4) p{
+    opacity: 0.6;
+    float: left;
+    margin-top: 34px;
+    width: 70px;
+}
+#Interface ul li:nth-child(2) input,#Interface ul li:nth-child(3) input{
+    width: 270px;
+    float: left;
+    opacity:0.8;
+}
+#Interface ul li:nth-child(4) input{
+    float: left;
+    width: 158px;
+    opacity:0.8;
+}
+#Interface ul li:nth-child(4) div{
+    float: left;
+    height: 40px;
+    margin: 27px 0 0 10px;
+}
+#Interface ul li:nth-child(5){
+    float: left;
+}
+#Interface ul li:nth-child(5) input{
+    opacity: 0.6;
+}
+#Interface ul li:nth-child(6){
+    float: left;
+    margin: 20px 0 0 150px;
+}
+#Interface ul li:nth-child(6) p{
+    opacity: 0.6;
+    margin-top: 0px;
+}
+h1 {
+
+    opacity: 0.6;
+    font-weight: 700;
+    text-shadow: 0 1px 4px rgba(0,0,0,.2);
+}
+
+form {
+    position: relative;
+    width: 305px;
+}
+
+input {
+    opacity: 0.6;
+    height: 42px;
+	line-height:42px;
+    margin-top: 25px;
+    padding: 0 15px;
+    background: #2d2d2d; /* browsers that don't support rgba */
+    background-color:transparent;
+    background: rgba(45,45,45,.15);
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 1px solid #3d3d3d; /* browsers that don't support rgba */
+    border: 1px solid rgba(255,255,255,.15);
+    -moz-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    -webkit-box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    box-shadow: 0 2px 3px 0 rgba(0,0,0,.1) inset;
+    font-family: 'PT Sans', Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,.1);
+    -o-transition: all .2s;
+    -moz-transition: all .2s;
+    -webkit-transition: all .2s;
+    -ms-transition: all .2s;
+}
+
+input:-moz-placeholder { color: #fff; }
+input:-ms-input-placeholder { color: #fff; }
+input::-webkit-input-placeholder { color: #fff;opacity: 0.6; }
+
+input:focus {
+    outline: none;
+    -moz-box-shadow:
+        0 2px 3px 0 rgba(0,0,0,.1) inset,
+        0 2px 7px 0 rgba(0,0,0,.2);
+    -webkit-box-shadow:
+        0 2px 3px 0 rgba(0,0,0,.1) inset,
+        0 2px 7px 0 rgba(0,0,0,.2);
+    box-shadow:
+        0 2px 3px 0 rgba(0,0,0,.1) inset,
+        0 2px 7px 0 rgba(0,0,0,.2);
+}
+
+#login {
+    opacity: 0.6;
+    cursor: pointer;
+    width: 300px;
+    height: 44px;
+    margin-left: 46px;
+    padding: 0;
+    background: #ef4300;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+    border-radius: 6px;
+    border: 0px;
+    -moz-box-shadow:
+        0 15px 30px 0 rgba(255,255,255,.25) inset,
+        0 2px 7px 0 rgba(0,0,0,.2);
+    -webkit-box-shadow:
+        0 15px 30px 0 rgba(255,255,255,.25) inset,
+        0 2px 7px 0 rgba(0,0,0,.2);
+    box-shadow:
+        0 15px 30px 0 rgba(255,255,255,.25) inset,
+        0 2px 7px 0 rgba(0,0,0,.2);
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 1px 2px rgba(0,0,0,.1);
+    -o-transition: all .2s;
+    -moz-transition: all .2s;
+    -webkit-transition: all .2s;
+    -ms-transition: all .2s;
+}
+
+#login:hover {
+    -moz-box-shadow:
+        0 15px 30px 0 rgba(255,255,255,.15) inset,
+        0 2px 7px 0 rgba(0,0,0,.2);
+    -webkit-box-shadow:
+        0 15px 30px 0 rgba(255,255,255,.15) inset,
+        0 2px 7px 0 rgba(0,0,0,.2);
+    box-shadow:
+        0 15px 30px 0 rgba(255,255,255,.15) inset,
+        0 2px 7px 0 rgba(0,0,0,.2);
+}
+
+#login:active {
+    -moz-box-shadow:
+        0 15px 30px 0 rgba(255,255,255,.15) inset,
+        0 2px 7px 0 rgba(0,0,0,.2);
+    -webkit-box-shadow:
+        0 15px 30px 0 rgba(255,255,255,.15) inset,
+        0 2px 7px 0 rgba(0,0,0,.2);
+    box-shadow:        
+        0 5px 8px 0 rgba(0,0,0,.1) inset,
+        0 1px 4px 0 rgba(0,0,0,.1);
+
+    border: 0px solid #ef4300;
+}

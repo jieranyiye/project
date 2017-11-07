@@ -1,0 +1,80 @@
+@charset "utf-8";
+/* CSS Document */
+.i_right {
+	float: left;
+	width: 300px;
+	padding: 50px 0 0 50px;
+}
+#form {
+	float: left;
+}
+#inputCode {
+	width: 100px;
+}
+.land {
+	width: 60px;
+	float: left;
+	text-align: left;
+	margin: 10px 0 20px 0px;
+	font-size: 12px;
+}
+.Input {
+	height: 18px;
+	float: left;
+	width: 200px;
+	margin: 6px 0 20px 0px;
+}
+#prompt {
+	float: left;
+	color: red;
+	width: 180px;
+	height: 20px;
+	margin: 0px 0 0 80px;
+	font-size: 15px;
+	text-align: left;
+}
+#confirm_button, #return_button {
+	float: left;
+	height: 24px;
+	width: 100px;
+	margin: 20px 0 0 25px;
+}
+.personal {
+	text-align: center;
+	float: right;
+	width: 170px;
+	height: 170px;
+	margin-right: 20px;
+}
+.personal ul {
+	display: none;
+	list-style: none;
+}
+.personal li {
+	padding-top: 5px;
+	background-color: #FFF;
+	float: left;
+	width: 114px;
+	height: 25px;
+	border: 1px solid #000;
+	border-top: none;
+}
+.personal li a {
+	text-decoration: none;
+	color: #000;
+}
+#personal_one {
+	border-top: 1px solid #000;
+	width: 50px;
+	border-right: none;
+	text-align: right;
+}
+#personal_two {
+	border-top: 1px solid #000;
+	width: 64px;
+	border-left: none;
+	text-align: left;
+}
+.personal:hover > #us {
+	display: block;
+}

@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>总览</title>
+    <link rel="stylesheet" type="text/css" href="static/templates/css/Interface.css">
+    <link rel="stylesheet" type="text/css" href="static/templates/css/index.css">
+    <link rel="stylesheet" type="text/css" href="static/templates/css/Admin.css">
+</head>
+<body>
+<div class="interface">
+    <div class="i_top">
+        <span id="ly_logo"></span>
+        <h1>无名之辈系统管理平台</h1>
+        <div class="personal">
+            <a href="" id="personal">
+                <span id="user_logo"></span></a>
+            <ul id="us">
+                <li id="personal_one">你好,</li>
+                <li id="personal_two">{{username}}</li>
+                <li id="personal_three" class="hiddenTags">
+                    <a href="/admin?page=1">管理</a>
+                </form></li>
+                <li>
+                    <a href="/">退出</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="i_left">
+        <h2>
+            <a href="/index?page=1">总览</a></h2>
+        <h2>
+            <a href="javascript:;" id="black">黑名单</a>
+    </div>
+    <div class="s_box">
+        <p id="yhtext">用户列表：</p>
+        <form name="input3" action="/blackListQuery" method="post">
+            <input type="button" name="new"  value="新增" id="newjoin"/>
+        </form>
+    </div>
+    <div class="record">
+        <table class="tb" id="tablelist">
+            <thead>
+            <tr>
+                <th class="list_one">序号</th>
+                <th class="list_two">用户名</th>
+                <th class="list_three">最后登录时间</th>
+                <th class="list_four">最后登录IP</th>
+                <th class="list_five">权限管理</th>
+                <th class="list_seven">状态</th>
+                <th class="list_six">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+     <div class="reason1" id="reason1">
+    <form name="input7" action="/deleteAdmin" method="post">
+        <p>是否确认删除此用户</p>
+        <input type="text" name="page" value="1" class="hiddenTags">
+        <input type="text" name="adminName" value="" class="hiddenTags" id="stID1">
+        <input type="button" name="cancel1" class="cancel1" value="取消" id="cancel">
+        <input type="submit" name="confirm1" class="confirm1" value="确认">
+    </form>
+    </div>
+    <div id="totalnumber">
+        <p id="number"></p>
+    </div>
+</div>
+<script type="text/javascript" src="static/templates/script/jquery.min.js"></script>
+<script type="text/javascript" src="static/templates/script/jquery.page.js"></script>
+<script type="text/javascript">
+    var authority = '{{authority}}';
+    var strs = new Array();
+    strs = authority.split(",");
+    var listInfo = {% raw adminInfo %};
+    var list = listInfo.logInfo;
+    var pageSize = listInfo.pageSize;
+    var page = {{page}};
+    var userName = '{{username}}';
+    var counti = 0;
+    var stat = listInfo.state;
+    var total = listInfo.total;
+    $(document).ready(function(){
+        if (strs[7] == '1') {
+            $("#personal_three").show();
+        }
+    });
+    $('#black').click(function(){
+        if (strs[4] == '0') {
+            alert("你没有此权限！")
+        } else if (strs[4] == '1') {
+            window.location.href="/blackList?page=1";
+        }
+    })
+    $('#newjoin').click(function(){
+        if (strs[8] == '0') {
+            alert("你没有此权限！")
+        } else if (strs[8] == '1') {
+            window.location.href="/addAdmin"
+        }
+    })
+    $('#cancel').click(function(){
+        $("#reason1").hide();
+    })
+    var appendTable = function (list, page) {
+        $("#tablelist>tbody").html("");
+        $(list).each(function (i, item) {
+            $("#tablelist>tbody").append(
+                "<tr>" +
+                "<td>" + ((page - 1) * 10 + i + 1) + "</td>" +
+                "<td>" + item.username + "</td>" +
+                "<td>" + item.loginTime + "</td>" +
+                "<td>" + item.loginIP + "</td>" +
+                "<td>" +"<input type='button' name='jurisdiction' class='jurisdiction' value='权限' data-id="+item.username+">" +"</td>" +
+                "<td>" +"<p class='state'>正常</p>" + "</td>" +
+                "<td>" +
+                "<input class='stateButton' type='button' name='join' value='禁用' data-id="+item.username+">" +
+                "<input type='button' name='details' value='删除' data-id="+item.username+">"+"</td>" +
+                "</tr>"
+            )
+                if(item.state == 0){
+                    var states = $('.state')[counti];
+                    states.innerHTML="禁用";
+                    var stateButtons = $('.stateButton')[counti];
+                    stateButtons.value = "启用";
+                }
+                counti++;
+            });
+        }
+    $(document).on('click','.stateButton',function(){
+        var id = $(this).attr('data-id');
+        var sta = $(this).val();
+        var state; 
+        if (strs[10] == '0') {
+            alert("你没有此权限！");
+        } else if(id == userName){
+            alert("不能自我禁用")
+        } else if (sta == '禁用'){
+            state = 0;
+            window.location.href="/onOrOff?adminName="+id + "&state=" + state;
+        }else if (sta == '启用'){
+            state = 1;
+            window.location.href="/onOrOff?adminName="+id +"&state=" + state;
+        }
+    })
+
+    $(document).on('click','.details',function(){
+        var sid1=$(this).attr('data-id');
+        if (strs[11] == '0') {
+            alert("你没有此权限！");
+        } else if(sid1 == userName){
+            alert("不能自我删除")
+        } else if (strs[11] == '1') {
+            $("#reason1").show();
+            $("#stID1").val() = sid1;
+        }
+    })
+     $(document).on('click','.jurisdiction',function(){
+        var si1d=$(this).attr('data-id');
+        if (strs[9] == '0') {
+            alert("你没有此权限！");
+        } else if (strs[9] == '1') {
+            window.location.href="/getAuthority?adminName="+si1d;
+        }
+    })
+    $(function () {
+        appendTable(list, page);
+        $(".tcdPageCode").createPage({
+            pageCount: pageSize,
+            current: page,
+            backFn: function (p) {
+                window.location.href = "/admin?page=" + p
+            }
+        });
+    })
+    $(document).ready(function(){
+        $('#number').text("共 "+total+" 条记录");
+        if (total=='0'){
+            $('#number').hide();
+            $('#dis').show();
+        } else {
+            $('#dis').hide();
+        }
+    })
+</script>
+</body>
+</html>
